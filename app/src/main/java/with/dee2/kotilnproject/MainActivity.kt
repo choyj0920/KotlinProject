@@ -31,13 +31,13 @@ class MainActivity : AppCompatActivity() {
         when(fragNum)
         {
             0 -> {
-                ft.replace(R.id.main_frame, FriendListFragment()).commit()
+                ft.replace(R.id.main_frame, FriendListActivity()).commit()
             }
             1 -> {
-                ft.replace(R.id.main_frame, QuestionListFragment()).commit()
+                ft.replace(R.id.main_frame, QuestionListActivity()).commit()
             }
             2 -> {
-                ft.replace(R.id.main_frame, BoardFragment()).commit()
+                ft.replace(R.id.main_frame, BoardActivity()).commit()
             }
 
         }
