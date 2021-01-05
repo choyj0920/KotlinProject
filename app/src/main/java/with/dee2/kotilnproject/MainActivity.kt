@@ -20,10 +20,7 @@ class MainActivity : AppCompatActivity() {
         btn_board.setOnClickListener{
             setFlag(2)
         }
-        btn_signup_activity.setOnClickListener{
-            val Loginintent=Intent(this, LoginActivity::class.java)
-            startActivity(Loginintent)
-        }
+
     }
 
     private fun setFlag(fragNum : Int) {
