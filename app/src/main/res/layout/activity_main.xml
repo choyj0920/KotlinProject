@@ -37,10 +37,9 @@
             android:text="Board"/>
 
 
-
-
-
     </LinearLayout>
+
+
 
     <FrameLayout
         android:id="@+id/main_frame"
