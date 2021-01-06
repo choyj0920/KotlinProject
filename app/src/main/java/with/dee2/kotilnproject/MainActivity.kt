@@ -20,7 +20,14 @@ class MainActivity : AppCompatActivity() {
         btn_board.setOnClickListener{
             setFlag(2)
         }
+<<<<<<< HEAD
 
+=======
+        btn_signup_activity.setOnClickListener{
+            val Loginintent=Intent(this, LoginActivity::class.java)
+            startActivity(Loginintent)
+        }
+>>>>>>> parent of d638913... Revert "Merge branch 'develop_uz' into develop_hayoung2"
     }
 
     private fun setFlag(fragNum : Int) {

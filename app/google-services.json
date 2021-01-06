@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "321781315198",
-    "project_id": "kotilnproject-8e7fe",
-    "storage_bucket": "kotilnproject-8e7fe.appspot.com"
+    "project_number": "963185617387",
+    "project_id": "kotilnproject-fc1cc",
+    "storage_bucket": "kotilnproject-fc1cc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:321781315198:android:cefec87ec646af63d04a2f",
+        "mobilesdk_app_id": "1:963185617387:android:e8da7154009290de8611ae",
         "android_client_info": {
           "package_name": "with.dee2.kotilnproject"
         }
       },
       "oauth_client": [
         {
-          "client_id": "321781315198-g0k6tnjk43p3n9dskq6q48as43tid473.apps.googleusercontent.com",
+          "client_id": "963185617387-2p0eioq3upqkpqr56qr7tlf2fhubrogt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyADkv7rqFV5A0Y26c0m-oJuFOh3hIIBur8"
+          "current_key": "AIzaSyBiR7mDSW6rnUgBH5dSAO60ZOqQLJyqF0Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "321781315198-g0k6tnjk43p3n9dskq6q48as43tid473.apps.googleusercontent.com",
+              "client_id": "963185617387-2p0eioq3upqkpqr56qr7tlf2fhubrogt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -10,5 +10,33 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+<<<<<<< HEAD
+=======
+
+        auth=FirebaseAuth.getInstance()
+        var currentUser =auth.currentUser
+        setContentView(R.layout.activity_login)
+
+
+
+        signup_button.setOnClickListener(){
+            createEmailId()
+        }
+    }
+
+    fun createEmailId(){
+        var email = emil_edittext.text.toString()
+        var password = password_edittext.text.toString()
+
+        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener{task ->
+            if(task.isSuccessful){
+                println("SignUp Success")
+                val user = auth.currentUser
+
+            }
+
+        }
+
+>>>>>>> parent of d638913... Revert "Merge branch 'develop_uz' into develop_hayoung2"
     }
 }
