@@ -18,7 +18,7 @@ class StartActivity : AppCompatActivity() {
     }
 
     fun moveMainActivity() {
-        Handler().postDelayed({startActivity(Intent(this,RegisterActivity::class.java))},3000L)
+        Handler().postDelayed({startActivity(Intent(this,LoginActivity::class.java))},3000L)
         Handler().postDelayed({finish()},5000L)
     }
 }
