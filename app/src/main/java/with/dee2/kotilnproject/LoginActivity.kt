@@ -10,8 +10,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-<<<<<<< HEAD
-=======
+
 
         auth=FirebaseAuth.getInstance()
         var currentUser =auth.currentUser
@@ -37,6 +36,5 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
->>>>>>> parent of d638913... Revert "Merge branch 'develop_uz' into develop_hayoung2"
-    }
+  }
 }
