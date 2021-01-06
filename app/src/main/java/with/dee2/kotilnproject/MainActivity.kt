@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             setFlag(2)
         }
 
-    }
+  }
 
     private fun setFlag(fragNum : Int) {
         val ft =supportFragmentManager.beginTransaction()
