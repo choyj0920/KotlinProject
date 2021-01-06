@@ -1,5 +1,6 @@
 package with.dee2.kotilnproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,6 +20,10 @@ class MainActivity : AppCompatActivity() {
         btn_board.setOnClickListener{
             setFlag(2)
         }
+        btn_signup_activity.setOnClickListener{
+            val Loginintent=Intent(this, LoginActivity::class.java)
+            startActivity(Loginintent)
+        }
     }
 
     private fun setFlag(fragNum : Int) {
@@ -26,14 +31,15 @@ class MainActivity : AppCompatActivity() {
         when(fragNum)
         {
             0 -> {
-                ft.replace(R.id.main_frame, FriendListActivity()).commit()
+                ft.replace(R.id.main_frame, FriendListFragment()).commit()
             }
             1 -> {
-                ft.replace(R.id.main_frame, QuestionListActivity()).commit()
+                ft.replace(R.id.main_frame, QuestionListFragment()).commit()
             }
             2 -> {
-                ft.replace(R.id.main_frame, BoardActivity()).commit()
+                ft.replace(R.id.main_frame, BoardFragment()).commit()
             }
+
         }
 
     }
