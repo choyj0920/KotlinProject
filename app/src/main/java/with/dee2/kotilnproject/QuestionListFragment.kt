@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.item_quesition.view.*
 
 class QuestionListFragment:Fragment() {
     var dataList=arrayListOf<Question>()
+
     lateinit var rvQuestion :RecyclerView
     val ref : DatabaseReference = FirebaseDatabase.getInstance().reference.child("questions")
     override fun onCreateView(
@@ -29,10 +31,9 @@ class QuestionListFragment:Fragment() {
 //            val intent= Intent(activity,ChatActivity::class.java)
 //            startActivity(intent)
 //        }
+
         loadData()
-        Log.d("durltj 여기서 ㅇ기서 ","${dataList}")
         var questionList= dataList
-        Log.d("questionList, 값 ㅗ학인 프래그먼트에서 ","${questionList.size}, dd ${questionList.toString()}")
 
         rvQuestion  = view.findViewById((R.id.recyclerView))as RecyclerView
         rvQuestion.layoutManager=
@@ -54,13 +55,11 @@ class QuestionListFragment:Fragment() {
                   var num=map["num"].toString()
                   var date=map["date"].toString()
                   var question=map["question"].toString()
-                  Log.d("값 들어감","${num} ,   ,, ${date} ,,,,, ${question}dddddd와아아")
                   dataList.add(Question(num,date,question))
-                  Log.d("dataList 값 존재하는지 확인 ",dataList.size.toString())
-                  Log.d("값 들어감","${num} ,   ,, ${date} ,,,,, ${question}dddddd와아아")
               }
 
                 rvQuestion.adapter=QuestionAdapter(requireContext(),dataList)
+
             }
         })
 
