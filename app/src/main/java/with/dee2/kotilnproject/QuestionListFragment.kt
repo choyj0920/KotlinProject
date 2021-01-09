@@ -38,7 +38,6 @@ class QuestionListFragment:Fragment() {
         rvQuestion.layoutManager=
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
         //rv_profile.setHasFixedSize((true)) // 성능개선
-        rvQuestion.adapter = QuestionAdapter(requireContext(), questionList)
         return view
     }
 
@@ -60,6 +59,8 @@ class QuestionListFragment:Fragment() {
                   Log.d("dataList 값 존재하는지 확인 ",dataList.size.toString())
                   Log.d("값 들어감","${num} ,   ,, ${date} ,,,,, ${question}dddddd와아아")
               }
+
+                rvQuestion.adapter=QuestionAdapter(requireContext(),dataList)
             }
         })
 
