@@ -1,12 +1,15 @@
 package with.dee2.kotilnproject
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.net.URL
+
 
 class ProfileAdapter(var context : Context, val profileList: ArrayList<Profiles>) : RecyclerView.Adapter<ProfileAdapter.CustomViewHolder>(){
 
@@ -21,17 +24,29 @@ class ProfileAdapter(var context : Context, val profileList: ArrayList<Profiles>
     }
     // 
     override fun onBindViewHolder(holder: ProfileAdapter.CustomViewHolder, position: Int) {
-        holder.gender.setImageResource(profileList.get(position).gender)
+        if (profileList.get(position).img=="null"){
+            holder.img.setImageResource(R.drawable.man)
+        }
+        else {
+            var image_task: URLtoBitmapTask = URLtoBitmapTask()
+            image_task = URLtoBitmapTask().apply {
+                url = URL("{이미지의 url}")
+            }
+            var bitmap: Bitmap = image_task.execute().get()
+            holder.img.setImageBitmap(bitmap)
+
+        }
         holder.name.text = profileList.get(position).name
         holder.age.text = profileList.get(position).age.toString()
         holder.job.text = profileList.get(position).job
     }
 
     class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val gender= itemView.findViewById<ImageView>(R.id.iv_profile)   // 성별
+        val img= itemView.findViewById<ImageView>(R.id.iv_profile)      // 프사
         val name =itemView.findViewById<TextView>(R.id.tv_name)         // 이름
         val age =itemView.findViewById<TextView>(R.id.tv_age)           // 나이
         val job =itemView.findViewById<TextView>(R.id.tv_job)           // 직업
 
     }
 }
+

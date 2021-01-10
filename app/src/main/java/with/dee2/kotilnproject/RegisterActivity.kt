@@ -83,6 +83,8 @@ class RegisterActivity : AppCompatActivity() {
         ref.setValue(user).addOnSuccessListener {
             Toast.makeText(this,"회원가입 성공",Toast.LENGTH_SHORT).show()
         }
+        LoginActivity.currentuseruid =FirebaseAuth.getInstance().uid ?:""
+
     }
 }
 

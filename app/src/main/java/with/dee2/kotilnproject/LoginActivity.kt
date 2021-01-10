@@ -1,14 +1,20 @@
 package with.dee2.kotilnproject
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
+    companion object{
+        // 현재 로그인 되어있는 유저 uid
+        public lateinit var currentuseruid :String
+
+    }
+
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +51,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
+        currentuseruid =FirebaseAuth.getInstance().uid ?:""
 
-  }
+    }
 }
