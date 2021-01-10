@@ -1,18 +1,20 @@
 package with.dee2.kotilnproject
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 class FriendListFragment:Fragment() {
     lateinit var rvprofile :RecyclerView
-    public val user_database : DatabaseReference = FirebaseDatabase.getInstance().reference.child("users").child(LoginActivity.currentuseruid)
+    public val user_database : DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
+    public val currentuser_database : DatabaseReference = FirebaseDatabase.getInstance().reference.child("users").child(LoginActivity.currentuseruid)
+    var profileList=arrayListOf<Profiles>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -21,27 +23,56 @@ class FriendListFragment:Fragment() {
 
         var view=inflater.inflate(R.layout.fragment_friendlist, container,false)
 
-        val profileList= arrayListOf(
-
-            Profiles("null","이하영1",21,"조윤직유기범"),
-            Profiles("null","조윤직",22,"유기견"),
-            Profiles("null","이하영",23,"바보"),
-            Profiles("null","조윤직",24,"멍청이"),
-            Profiles("null","이하영",24,"조윤직폭행범"),
-            Profiles("null","조윤직",25,"이하영 골칫덩이"),
-            Profiles("null","엑스트라1",20,"엑스트라아아ㅏㅏ1"),
-            Profiles("null","엑스트라2",21,"엑스트라아아아ㅏ2"),
-            Profiles("null","엑스트라3",20,"엑스트라아아ㅏㅏ3"),
-            Profiles("null","엑스트라4",21,"엑스트라아아아ㅏ4"),
-            Profiles("null","엑스트라5",20,"엑스트라아아ㅏㅏ5"),
-            Profiles("null","엑스트라6",21,"엑스트라아아아ㅏ6")
-        )
+        loadData()
         rvprofile = view.findViewById((R.id.rv_profile))as RecyclerView
         rvprofile.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         //rv_profile.setHasFixedSize((true)) // 성능개선
-        rvprofile.adapter = ProfileAdapter(requireContext(), profileList)
+
+        //rvprofile.adapter = ProfileAdapter(requireContext(), profileList)
 
         return view
+    }
+
+    fun loadData()  {
+        user_database.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                profileList= arrayListOf<Profiles>()
+
+
+                for (i in snapshot.child(LoginActivity.currentuseruid).child("chat").children){  // 현재 유저의 chat방으로 반복문
+                    var map =i.value as Map<String,Any>
+                    var theOtherPersonuid= map["theOtherPerson"].toString()
+                    var lastmsg=map["Lastmsg"].toString()
+                    var lasttimestamp=map["lasttimestamp"].toString()
+
+                    var chatroomid =i.key.toString()
+                    if(snapshot.child(theOtherPersonuid).exists()==false)
+                        continue
+                    var otherPerson= snapshot.child(theOtherPersonuid).value as Map<String,Any>
+
+                    var img =otherPerson["imageUrl"].toString()
+                    var age = otherPerson["age"].toString().toInt()
+                    var uid = otherPerson["uid"].toString()
+                    var name = otherPerson["name"].toString()
+
+
+
+                    Log.d("error", "$chatroomid\n $img\n$uid $name\n$age")
+                    profileList.add(Profiles(img,name,uid,age,lastmsg,chatroomid,lasttimestamp)) // 리스트 삽입
+                }
+                profileList.sortByDescending { data-> data.timestamp } // 가장 이른 시간 부터 정렬
+
+                rvprofile.adapter=ProfileAdapter(requireContext(),profileList)
+
+            }
+
+
+        })
+
     }
 
 }

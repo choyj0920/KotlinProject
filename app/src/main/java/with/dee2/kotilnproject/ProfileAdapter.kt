@@ -30,7 +30,7 @@ class ProfileAdapter(var context : Context, val profileList: ArrayList<Profiles>
         else {
             var image_task: URLtoBitmapTask = URLtoBitmapTask()
             image_task = URLtoBitmapTask().apply {
-                url = URL("{이미지의 url}")
+                url = URL(profileList.get(position).img)
             }
             var bitmap: Bitmap = image_task.execute().get()
             holder.img.setImageBitmap(bitmap)
@@ -38,14 +38,15 @@ class ProfileAdapter(var context : Context, val profileList: ArrayList<Profiles>
         }
         holder.name.text = profileList.get(position).name
         holder.age.text = profileList.get(position).age.toString()
-        holder.job.text = profileList.get(position).job
+        holder.lastmsg.text = profileList.get(position).lastmsg
+
     }
 
     class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val img= itemView.findViewById<ImageView>(R.id.iv_profile)      // 프사
         val name =itemView.findViewById<TextView>(R.id.tv_name)         // 이름
         val age =itemView.findViewById<TextView>(R.id.tv_age)           // 나이
-        val job =itemView.findViewById<TextView>(R.id.tv_job)           // 직업
+        val lastmsg =itemView.findViewById<TextView>(R.id.tv_job)           // 마지막 메시지
 
     }
 }
