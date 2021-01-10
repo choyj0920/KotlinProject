@@ -38,7 +38,6 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener{task ->
             if(task.isSuccessful){
                 val intent= Intent(this,MainActivity::class.java)
-                intent.putExtra("user",auth.currentUser)
                 startActivity(intent)
             }else{
                 Toast.makeText(this,"로그인 실패", Toast.LENGTH_SHORT).show()
