@@ -8,6 +8,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_post.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class PostActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
@@ -25,13 +27,15 @@ class PostActivity : AppCompatActivity() {
     }
 
     fun saveData() {
-        val data=Post(FirebaseAuth.getInstance().currentUser?.uid.toString(),post_data.text.toString(),post_date.text.toString())
+        val time =SimpleDateFormat("yy.MM.dd").format(Date())
+        val data=Post(FirebaseAuth.getInstance().currentUser?.uid.toString(),post_question.text.toString(),post_data.text.toString(),time)
         database=FirebaseDatabase.getInstance().reference.child("users")
             .child(FirebaseAuth.getInstance().currentUser?.uid.toString())
             .child("questions")
         database.setValue(data)
 
         database= FirebaseDatabase.getInstance().reference.child("community")
+            .child(FirebaseAuth.getInstance().currentUser?.uid.toString())
             .child(post_question.text.toString())
         database.setValue(data)
 
