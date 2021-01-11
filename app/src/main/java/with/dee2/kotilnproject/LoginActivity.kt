@@ -11,7 +11,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 class LoginActivity : AppCompatActivity() {
     companion object{
         // 현재 로그인 되어있는 유저 uid
-        public lateinit var currentuseruid :String
+        public lateinit var currentuseruid : String
+        public lateinit var currentuserimg : String
 
     }
 

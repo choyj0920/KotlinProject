@@ -28,7 +28,7 @@ class FriendListFragment:Fragment() {
         rvprofile.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         //rv_profile.setHasFixedSize((true)) // 성능개선
 
-        //rvprofile.adapter = ProfileAdapter(requireContext(), profileList)
+        rvprofile.adapter = ProfileAdapter(requireContext(), profileList)
 
         return view
     }
@@ -41,7 +41,7 @@ class FriendListFragment:Fragment() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 profileList= arrayListOf<Profiles>()
-
+                LoginActivity.currentuserimg=(snapshot.child(LoginActivity.currentuseruid).value as Map<String,Any> )["imageUrl"].toString()
 
                 for (i in snapshot.child(LoginActivity.currentuseruid).child("chat").children){  // 현재 유저의 chat방으로 반복문
                     var map =i.value as Map<String,Any>
