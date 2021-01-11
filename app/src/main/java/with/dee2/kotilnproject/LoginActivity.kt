@@ -13,6 +13,7 @@ class LoginActivity : AppCompatActivity() {
         // 현재 로그인 되어있는 유저 uid
         public lateinit var currentuseruid : String
         public lateinit var currentuserimg : String
+        public lateinit var currentusername : String
 
     }
 
@@ -52,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
-        currentuseruid =FirebaseAuth.getInstance().uid ?:""
+        currentuseruid =FirebaseAuth.getInstance().currentUser?.uid.toString()
 
     }
 }

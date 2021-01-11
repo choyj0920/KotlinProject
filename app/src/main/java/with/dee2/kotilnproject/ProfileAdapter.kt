@@ -46,6 +46,8 @@ class ProfileAdapter(var context : Context, val profileList: ArrayList<Profiles>
             intent.putExtra("chatroomid",profileList.get(position).chatroomid)
             intent.putExtra("theOtherPersonuid",profileList.get(position).uid)
             intent.putExtra("theOtherPersonimg",profileList.get(position).img)
+            intent.putExtra("theOtherPersonname",profileList.get(position).name)
+
 
             context.startActivity(intent)
         }
