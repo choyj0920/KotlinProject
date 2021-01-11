@@ -4,14 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_register.*
@@ -64,7 +63,10 @@ class RegisterActivity : AppCompatActivity() {
    }
 
     fun uploadImage() {
-        if(selectedPhtoUri==null) return
+        if(selectedPhtoUri==null) {
+            saveUserToDatabase("null")
+            return
+        }
         val filename=UUID.randomUUID().toString()
         val ref=FirebaseStorage.getInstance().getReference("/images/$filename")
         ref.putFile(selectedPhtoUri!!).addOnSuccessListener {
@@ -81,6 +83,8 @@ class RegisterActivity : AppCompatActivity() {
         ref.setValue(user).addOnSuccessListener {
             Toast.makeText(this,"회원가입 성공",Toast.LENGTH_SHORT).show()
         }
+        LoginActivity.currentuseruid =FirebaseAuth.getInstance().uid ?:""
+
     }
 }
 
