@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:id="@+id/questionBox"
-    android:layout_marginBottom="5dp">
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="15dp">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,9 +15,10 @@
             android:id="@+id/num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginLeft="22dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginBottom="2dp"
             android:text="1" />
 
         <TextView
@@ -24,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:textSize="9sp"
+            android:textSize="11sp"
             android:text="2020.01.08" />
 
     </LinearLayout>
@@ -35,7 +37,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         android:text="이번년도 새해 다짐 ?"
-        android:textSize="13sp"/>
+        android:textSize="16sp"/>
 
 
 </LinearLayout>
