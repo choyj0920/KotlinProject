@@ -2,6 +2,7 @@ package with.dee2.kotilnproject
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ class BoardAdapter(var context : Context, val boardList: ArrayList<Board>) : Rec
             image_task = URLtoBitmapTask().apply {
                 url = URL(boardList.get(position).img)
             }
+
             var bitmap: Bitmap = image_task.execute().get()
             holder.img.setImageBitmap(bitmap)
 
