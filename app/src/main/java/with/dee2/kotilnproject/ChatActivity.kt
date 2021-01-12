@@ -63,7 +63,7 @@ class ChatActivity() : AppCompatActivity() {
     }
 
     fun ViewProfileOff(){
-        profileFrame.setVisibility(View.GONE)
+        profileframe.setVisibility(View.GONE)
 
     }
     fun ViewProfileOn(isCurrentUser: Boolean){
@@ -74,7 +74,7 @@ class ChatActivity() : AppCompatActivity() {
         var msg = userProfile["msg"].toString()
 
         if (img=="null"){
-            iv_profile.setImageResource(R.drawable.man)
+            iv_img.setImageResource(R.drawable.man)
         }
         else {
             var image_task: URLtoBitmapTask = URLtoBitmapTask()
@@ -82,13 +82,13 @@ class ChatActivity() : AppCompatActivity() {
                 url = URL(img)
             }
             var bitmap: Bitmap = image_task.execute().get()
-            iv_profile.setImageBitmap(bitmap)
+            iv_img.setImageBitmap(bitmap)
         }
         tv_age.text=age
         tv_name.text=name
-        tv_job.text=msg
+        tv_msg.text=msg
 
-        profileFrame.setVisibility(View.VISIBLE)
+        profileframe.setVisibility(View.VISIBLE)
 
     }
 

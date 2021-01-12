@@ -48,17 +48,16 @@ class ProfileAdapter(var context : Context, val profileList: ArrayList<Profiles>
             intent.putExtra("theOtherPersonimg",profileList.get(position).img)
             intent.putExtra("theOtherPersonname",profileList.get(position).name)
 
-
             context.startActivity(intent)
         }
 
     }
 
     class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val img= itemView.findViewById<ImageView>(R.id.iv_profile)      // 프사
-        val name =itemView.findViewById<TextView>(R.id.tv_name)         // 이름
-        val age =itemView.findViewById<TextView>(R.id.tv_age)           // 나이
-        val lastmsg =itemView.findViewById<TextView>(R.id.tv_job)           // 마지막 메시지
+        val img= itemView.findViewById<ImageView>(R.id.board_img)      // 프사
+        val name =itemView.findViewById<TextView>(R.id.board_name)         // 이름
+        val age =itemView.findViewById<TextView>(R.id.board_age)           // 나이
+        val lastmsg =itemView.findViewById<TextView>(R.id.board_job)           // 마지막 메시지
 
     }
 }
