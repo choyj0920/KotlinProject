@@ -1,16 +1,18 @@
 package with.dee2.kotilnproject
 
-import android.content.Context
+import android.graphics.Bitmap
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_chat.*
+import java.net.URL
 import java.util.*
 
 class ChatActivity() : AppCompatActivity() {
@@ -19,7 +21,7 @@ class ChatActivity() : AppCompatActivity() {
     lateinit var chatroomid : String
     public val chat_database : DatabaseReference = FirebaseDatabase.getInstance().reference.child("chatroom")
     var chatlist=arrayListOf<ChatMessage>()
-    lateinit var chatcontext:Context
+    lateinit var chatcontext:ChatActivity
     companion object{
         lateinit var theOtherPersonuid:String
         lateinit var theOtherPersonimg:String
@@ -45,14 +47,49 @@ class ChatActivity() : AppCompatActivity() {
         //rvprofile.adapter = ProfileAdapter(requireContext(), profileList)
         rv_chat.adapter=ChatMessagesAdapter(chatcontext,chatlist)
 
+        ViewProfileOff()
 
         send.setOnClickListener {
             saveData(message,LoginActivity.currentusername,LoginActivity.currentuseruid,chatroomid)
+            rv_chat.scrollToPosition(0)
 
         }
-
+        profilebackground.setOnClickListener{
+            ViewProfileOff()
+        }
 
     }
+
+    fun ViewProfileOff(){
+        profileFrame.setVisibility(View.GONE)
+
+    }
+    fun ViewProfileOn(isCurrentUser: Boolean){
+        var userProfile= FriendListFragment.usersnapshot.child(if(isCurrentUser)LoginActivity.currentuseruid else theOtherPersonuid).value as Map<String,Any>
+        var img=userProfile["imageUrl"].toString()
+        var name = userProfile["name"].toString()
+        var age = userProfile["age"].toString()
+        var msg = userProfile["msg"].toString()
+
+        if (img=="null"){
+            iv_profile.setImageResource(R.drawable.man)
+        }
+        else {
+            var image_task: URLtoBitmapTask = URLtoBitmapTask()
+            image_task = URLtoBitmapTask().apply {
+                url = URL(img)
+            }
+            var bitmap: Bitmap = image_task.execute().get()
+            iv_profile.setImageBitmap(bitmap)
+        }
+        tv_age.text=age
+        tv_name.text=name
+        tv_job.text=msg
+
+        profileFrame.setVisibility(View.VISIBLE)
+
+    }
+
     @IgnoreExtraProperties
     data class Chat( var useruid: String? = "", var timestamp: String? = "", var msgtext: String? = "", var username: String? = "") {
         @Exclude
@@ -92,13 +129,7 @@ class ChatActivity() : AppCompatActivity() {
             }
 
 
-//        database= FirebaseDatabase.getInstance().reference.child("users")
-//            .child(theOtherPersonuid).child("chat").child(chatroomid)
-//        database.setValue(mapOf("Lastmsg" to text.text.toString(),"lasttimestamp" to dateFormat, "theOtherPerson" to LoginActivity.currentuseruid))
-//
-//        database= FirebaseDatabase.getInstance().reference.child("users")
-//            .child(LoginActivity.currentuseruid).child("chat").child(chatroomid)
-//        database.setValue(mapOf("Lastmsg" to text.text.toString(),"lasttimestamp" to dateFormat, "theOtherPerson" to theOtherPersonuid))
+
     }
 
 
@@ -126,6 +157,7 @@ class ChatActivity() : AppCompatActivity() {
                 chatlist.sortByDescending{ data-> data.timestamp } // 가장 이른 시간 부터 정렬
 
                 rv_chat.adapter=ChatMessagesAdapter(chatcontext,chatlist)
+                rv_chat.scrollToPosition(0)
 
             }
         })
