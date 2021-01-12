@@ -31,6 +31,7 @@ class RegisterActivity : AppCompatActivity() {
             intent.type="image/*"
             startActivityForResult(intent,0)
         }
+
     }
 
     var selectedPhtoUri: Uri?=null

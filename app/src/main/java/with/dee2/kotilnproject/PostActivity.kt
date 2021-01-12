@@ -28,7 +28,14 @@ class PostActivity : AppCompatActivity() {
 
     fun saveData() {
         val time =SimpleDateFormat("yy.MM.dd").format(Date())
-        val data=Post(FirebaseAuth.getInstance().currentUser?.uid.toString(),post_question.text.toString(),post_data.text.toString(),time)
+        var data:Post?=null
+
+        if (check_private.isChecked){
+            data=Post("private",post_question.text.toString(),post_data.text.toString(),time)
+        }else{
+            data=Post(FirebaseAuth.getInstance().currentUser?.uid.toString(),post_question.text.toString(),post_data.text.toString(),time)
+        }
+
         database=FirebaseDatabase.getInstance().reference.child("users")
             .child(FirebaseAuth.getInstance().currentUser?.uid.toString())
             .child("questions")
