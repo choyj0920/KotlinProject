@@ -1,12 +1,13 @@
 package with.dee2.kotilnproject
 
 import android.content.Intent
-import android.net.Uri
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_setting.*
+import java.net.URL
 
 class SettingActivity : AppCompatActivity() {
 
