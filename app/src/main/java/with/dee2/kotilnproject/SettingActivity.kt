@@ -54,7 +54,13 @@ class SettingActivity : AppCompatActivity() {
                     if(map["imageUrl"].toString()=="null"){
                         setting_img.setImageResource(R.drawable.man)
                     }else{
-                        setting_img.setImageURI(Uri.parse(map["imageUrl"].toString()))
+                        var image_task: URLtoBitmapTask = URLtoBitmapTask()
+                        image_task = URLtoBitmapTask().apply {
+                            url = URL(map["imageUrl"].toString())
+                        }
+
+                        var bitmap: Bitmap = image_task.execute().get()
+                        setting_img.setImageBitmap(bitmap)
                     }
 
                 }
