@@ -47,7 +47,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
-        android:id="@+id/profileFrame"
+        android:id="@+id/profileframe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom">
@@ -84,7 +84,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_job"
+                android:id="@+id/tv_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이하영 골칫덩어리"
@@ -118,7 +118,7 @@
             android:layout_marginBottom="8dp">
 
             <ImageView
-                android:id="@+id/iv_profile"
+                android:id="@+id/iv_img"
                 android:layout_width="103dp"
                 android:layout_height="97dp"
                 android:layout_marginBottom="120dp"
