@@ -50,8 +50,10 @@ class ChatActivity() : AppCompatActivity() {
         ViewProfileOff()
 
         send.setOnClickListener {
-            saveData(message,LoginActivity.currentusername,LoginActivity.currentuseruid,chatroomid)
-            rv_chat.scrollToPosition(0)
+            if(message.text.toString()!="") {
+                saveData(message,LoginActivity.currentusername,LoginActivity.currentuseruid,chatroomid)
+                rv_chat.scrollToPosition(0)
+            }
 
         }
         profilebackground.setOnClickListener{
