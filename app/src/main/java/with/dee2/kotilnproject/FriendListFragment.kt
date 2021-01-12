@@ -15,6 +15,9 @@ class FriendListFragment:Fragment() {
     lateinit var rvprofile :RecyclerView
     public val user_database : DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
     public val currentuser_database : DatabaseReference = FirebaseDatabase.getInstance().reference.child("users").child(LoginActivity.currentuseruid)
+    companion object{
+        lateinit var usersnapshot :DataSnapshot
+    }
     var profileList=arrayListOf<Profiles>()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +44,7 @@ class FriendListFragment:Fragment() {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
+                usersnapshot=snapshot
                 profileList= arrayListOf<Profiles>()
                 LoginActivity.currentuseruid= FirebaseAuth.getInstance().currentUser?.uid.toString()
                 var currentusermap=snapshot.child(LoginActivity.currentuseruid).value as Map<String,Any>

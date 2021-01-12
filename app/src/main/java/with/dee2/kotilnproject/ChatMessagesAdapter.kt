@@ -1,6 +1,5 @@
 package with.dee2.kotilnproject
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.net.URL
 
 
-class ChatMessagesAdapter(var context : Context, val chatmsglist: ArrayList<ChatMessage>) : RecyclerView.Adapter<ChatMessagesAdapter.CustomViewHolder>(){
+class ChatMessagesAdapter(var context : ChatActivity, val chatmsglist: ArrayList<ChatMessage>) : RecyclerView.Adapter<ChatMessagesAdapter.CustomViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): ChatMessagesAdapter.CustomViewHolder {
@@ -39,6 +38,10 @@ class ChatMessagesAdapter(var context : Context, val chatmsglist: ArrayList<Chat
 
         }
         holder.name.text = chatmsglist.get(position).msgtext
+
+        holder.image.setOnClickListener{
+            context.ViewProfileOn(chatmsglist[position].isCurrentUser)
+        }
 
 
 
