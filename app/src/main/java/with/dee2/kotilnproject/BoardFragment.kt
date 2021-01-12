@@ -63,7 +63,6 @@ class BoardFragment:Fragment() {
                                 var name =map["name"].toString()
                                 var img=map["imageUrl"].toString()
                                 dataList.add(Board(img,name,question,content,date))
-                                Log.d("값 들어간다~ ", dataList.size.toString())
                                 rvBoard.adapter=BoardAdapter(requireContext(),dataList)
                             }
 

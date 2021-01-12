@@ -10,7 +10,6 @@
         android:id="@+id/community_post_img"
         android:layout_width="107dp"
         android:layout_height="107dp"
-        android:background="@drawable/background_round"
         tools:srcCompat="@tools:sample/avatars" />
 
     <LinearLayout
