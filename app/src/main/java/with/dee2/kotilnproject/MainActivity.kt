@@ -1,11 +1,13 @@
 package with.dee2.kotilnproject
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 private const val NUM_PAGES = 3
@@ -35,6 +37,11 @@ class MainActivity : FragmentActivity() {
         TabLayoutMediator(findViewById(R.id.tabLayout), viewPager){tab,position->
             tab.text=tabList[position]
         }.attach()
+
+        setting.setOnClickListener{
+            val intent= Intent(this,SettingActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

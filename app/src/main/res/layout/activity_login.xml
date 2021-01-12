@@ -7,32 +7,41 @@
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
+    <ImageView
+        android:layout_marginTop="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@mipmap/conifer"/>
     <EditText
         android:id="@+id/email_edittext"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="50dp"/>
     <EditText
         android:id="@+id/password_edittext"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="350dp"
         android:inputType="textPassword"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="20dp"/>
     <Button
         android:id="@+id/signIn_button"
         android:text="로그인"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="160dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/background_round"
+        android:backgroundTint="@color/colorAccent"/>
 
     <TextView
         android:id="@+id/register_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:text="아직 회원이 아니신가요 ? " />
 
 

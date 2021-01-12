@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import java.net.URL
 
-class BoardAdapter(var context : Context, val boardList: ArrayList<Board>) : RecyclerView.Adapter<BoardAdapter.CustomViewHolder>() {
+class BoardAdapter(var boardFragment: BoardFragment, var context : Context, val boardList: ArrayList<Board>) : RecyclerView.Adapter<BoardAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -34,12 +34,18 @@ class BoardAdapter(var context : Context, val boardList: ArrayList<Board>) : Rec
             image_task = URLtoBitmapTask().apply {
                 url = URL(boardList.get(position).img)
             }
+
             var bitmap: Bitmap = image_task.execute().get()
             holder.img.setImageBitmap(bitmap)
 
         }
         holder.img.setOnClickListener{
-            Toast.makeText(context,"정보 나와야함 ",Toast.LENGTH_SHORT).show()
+            if(boardList.get(position).name=="By 익명"){ // 익명일 경우 프로필 접근 못함
+                Toast.makeText(context,"글 작성자가 익명이에요 ",Toast.LENGTH_SHORT).show()
+            }
+            else{                                       // 익명이 아닐 경우 프로필 접근
+                boardFragment.ViewProfileOn(boardList.get(position).uid)
+            }
         }
         holder.content.text=boardList.get(position).content
         holder.date.text=boardList.get(position).date

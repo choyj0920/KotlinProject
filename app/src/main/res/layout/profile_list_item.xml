@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_profile"
+            android:id="@+id/board_img"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="8dp"
@@ -30,7 +30,7 @@
             app:srcCompat="@drawable/man" />
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/board_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -38,11 +38,11 @@
             android:text="조윤직"
             android:textColor="#000000"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/iv_profile"
-            app:layout_constraintTop_toTopOf="@+id/iv_profile" />
+            app:layout_constraintStart_toEndOf="@+id/board_img"
+            app:layout_constraintTop_toTopOf="@+id/board_img" />
 
         <TextView
-            android:id="@+id/tv_job"
+            android:id="@+id/board_job"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -52,19 +52,19 @@
             android:textColor="#000000"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_profile"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+            app:layout_constraintStart_toEndOf="@+id/board_img"
+            app:layout_constraintTop_toBottomOf="@+id/board_name" />
 
         <TextView
-            android:id="@+id/tv_age"
+            android:id="@+id/board_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="25"
             android:textColor="#FF0000"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_name"
-            app:layout_constraintStart_toEndOf="@+id/tv_name"
-            app:layout_constraintTop_toTopOf="@+id/tv_name" />
+            app:layout_constraintBottom_toBottomOf="@+id/board_name"
+            app:layout_constraintStart_toEndOf="@+id/board_name"
+            app:layout_constraintTop_toTopOf="@+id/board_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
