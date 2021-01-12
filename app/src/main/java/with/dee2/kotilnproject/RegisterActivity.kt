@@ -46,20 +46,24 @@ class RegisterActivity : AppCompatActivity() {
     }
 
    fun register(){
+       if(email.text.toString()=="" || password.text.toString()=="" || age.text.toString()=="" || msg.text.toString()=="") { // 회원 가입
+           Toast.makeText(this,"회원가입 실패(빈 곳이 있습니다.)",Toast.LENGTH_SHORT).show()
+           Log.d("error","빈칸 존재")
+           return
+       }
        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.text.toString().trim(), password.text.toString().trim())
            .addOnCompleteListener(OnCompleteListener {
                task ->
                    if (task.isSuccessful) {
                        val currentUser=FirebaseAuth.getInstance().currentUser
+
                        uploadImage()
-                       val intent= Intent(this,MainActivity::class.java)
-                       intent.putExtra("user",currentUser.toString())
-                       startActivity(intent)
-                       finish()
+
+
                    } else {
-                       Toast.makeText(this,"회원가입 실패",Toast.LENGTH_SHORT).show()
                        Log.d("error",task.exception!!.message.toString())
                    }
+
            })
    }
 
@@ -69,9 +73,13 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
         val filename=UUID.randomUUID().toString()
+
         val ref=FirebaseStorage.getInstance().getReference("/images/$filename")
         ref.putFile(selectedPhtoUri!!).addOnSuccessListener {
             ref.downloadUrl.addOnSuccessListener {
+                Log.d("error","putfile 성공---------------------------\n")
+                Toast.makeText(this,"putfile성공 ",Toast.LENGTH_SHORT).show()
+
                 saveUserToDatabase(it.toString())
             }
         }
@@ -82,12 +90,16 @@ class RegisterActivity : AppCompatActivity() {
         val user=User(uid,name.text.toString(),profileImage,age.text.toString(),msg.text.toString())
 
         ref.setValue(user).addOnSuccessListener {
+            val intent= Intent(this,MainActivity::class.java)
+            //intent.putExtra("user",currentUser.toString())
+            startActivity(intent)
+            finish()
             Toast.makeText(this,"회원가입 성공",Toast.LENGTH_SHORT).show()
-        }
-        LoginActivity.currentuseruid =FirebaseAuth.getInstance().uid ?:""
 
+        }
     }
 }
+
 
 
 data class User(val uid:String, val name:String, val imageUrl:String,val age:String, val msg:String)

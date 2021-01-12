@@ -42,6 +42,11 @@ class LoginActivity : AppCompatActivity() {
     fun login(){
         var email = email_edittext.text.toString()
         var password = password_edittext.text.toString()
+        if (email=="" || password == ""){
+            Toast.makeText(this,"빈 곳이 있습니다.",Toast.LENGTH_SHORT).show()
+            return
+
+        }
 
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener{task ->
             if(task.isSuccessful){

@@ -13,8 +13,8 @@ import com.google.firebase.database.*
 
 class FriendListFragment:Fragment() {
     lateinit var rvprofile :RecyclerView
-    public val user_database : DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
-    public val currentuser_database : DatabaseReference = FirebaseDatabase.getInstance().reference.child("users").child(LoginActivity.currentuseruid)
+    public var user_database : DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
+    lateinit var currentuser_database : DatabaseReference
     companion object{
         lateinit var usersnapshot :DataSnapshot
     }
@@ -24,6 +24,7 @@ class FriendListFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        currentuser_database = FirebaseDatabase.getInstance().reference.child("users").child(FirebaseAuth.getInstance().currentUser?.uid.toString())
 
         var view=inflater.inflate(R.layout.fragment_friendlist, container,false)
 
