@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class FriendListFragment:Fragment() {
@@ -28,7 +29,7 @@ class FriendListFragment:Fragment() {
         rvprofile.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         //rv_profile.setHasFixedSize((true)) // 성능개선
 
-        //rvprofile.adapter = ProfileAdapter(requireContext(), profileList)
+        rvprofile.adapter = ProfileAdapter(requireContext(), profileList)
 
         return view
     }
@@ -41,8 +42,10 @@ class FriendListFragment:Fragment() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 profileList= arrayListOf<Profiles>()
-
-
+                LoginActivity.currentuseruid= FirebaseAuth.getInstance().currentUser?.uid.toString()
+                var currentusermap=snapshot.child(LoginActivity.currentuseruid).value as Map<String,Any>
+                LoginActivity.currentuserimg= currentusermap["imageUrl"].toString()
+                LoginActivity.currentusername= currentusermap["name"].toString()
                 for (i in snapshot.child(LoginActivity.currentuseruid).child("chat").children){  // 현재 유저의 chat방으로 반복문
                     var map =i.value as Map<String,Any>
                     var theOtherPersonuid= map["theOtherPerson"].toString()
