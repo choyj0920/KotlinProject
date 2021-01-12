@@ -1,6 +1,7 @@
 package with.dee2.kotilnproject
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +40,17 @@ class ProfileAdapter(var context : Context, val profileList: ArrayList<Profiles>
         holder.name.text = profileList.get(position).name
         holder.age.text = profileList.get(position).age.toString()
         holder.lastmsg.text = profileList.get(position).lastmsg
+
+        holder.itemView.setOnClickListener{
+            val intent= Intent(context,ChatActivity::class.java)
+            intent.putExtra("chatroomid",profileList.get(position).chatroomid)
+            intent.putExtra("theOtherPersonuid",profileList.get(position).uid)
+            intent.putExtra("theOtherPersonimg",profileList.get(position).img)
+            intent.putExtra("theOtherPersonname",profileList.get(position).name)
+
+
+            context.startActivity(intent)
+        }
 
     }
 
