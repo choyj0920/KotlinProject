@@ -61,7 +61,6 @@ class RegisterActivity : AppCompatActivity() {
 
 
                    } else {
-                       Toast.makeText(this,"회원가입 실패",Toast.LENGTH_SHORT).show()
                        Log.d("error",task.exception!!.message.toString())
                    }
 
