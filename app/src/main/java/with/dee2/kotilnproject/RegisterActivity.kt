@@ -78,7 +78,6 @@ class RegisterActivity : AppCompatActivity() {
         ref.putFile(selectedPhtoUri!!).addOnSuccessListener {
             ref.downloadUrl.addOnSuccessListener {
                 Log.d("error","putfile 성공---------------------------\n")
-                Toast.makeText(this,"putfile성공 ",Toast.LENGTH_SHORT).show()
 
                 saveUserToDatabase(it.toString())
             }
