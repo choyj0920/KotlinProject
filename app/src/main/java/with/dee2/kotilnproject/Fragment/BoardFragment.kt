@@ -1,4 +1,4 @@
-package with.dee2.kotilnproject
+package with.dee2.kotilnproject.Fragment
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -14,6 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_board.*
+import with.dee2.kotilnproject.Adapter.BoardAdapter
+import with.dee2.kotilnproject.ChatActivity
+import with.dee2.kotilnproject.LoginActivity
+import with.dee2.kotilnproject.Model.Board
+import with.dee2.kotilnproject.R
+import with.dee2.kotilnproject.URLtoBitmapTask
 import java.net.URL
 
 class BoardFragment:Fragment() {
@@ -59,7 +65,8 @@ class BoardFragment:Fragment() {
             board_img.setImageResource(R.drawable.man)
         }
         else {
-            var image_task: URLtoBitmapTask = URLtoBitmapTask()
+            var image_task: URLtoBitmapTask =
+                URLtoBitmapTask()
             image_task = URLtoBitmapTask().apply {
                 url = URL(img)
             }
@@ -73,13 +80,14 @@ class BoardFragment:Fragment() {
         profileFrame.setVisibility(View.VISIBLE)
         // 자신이면 대화하기 없애기
         var talkstart=profileFrame.findViewById<Button>(R.id.talkstart)
-        talkstart.visibility=if(LoginActivity.currentuseruid== uid) View.GONE else View.VISIBLE
+        talkstart.visibility=if(LoginActivity.currentuseruid == uid) View.GONE else View.VISIBLE
         talkstart.setOnClickListener{
             chatStart(uid,img,name)
         }
     }
     fun chatStart(uid:String,img:String,name:String){
-        val intent= Intent(requireContext(),ChatActivity::class.java)
+        val intent= Intent(requireContext(),
+            ChatActivity::class.java)
         var chatroomid:String?=null
         // 원래 이야기하던 채팅방이 있었으면..
         for (i in FriendListFragment.usersnapshot.child(LoginActivity.currentuseruid).child("chat").children){
@@ -134,15 +142,43 @@ class BoardFragment:Fragment() {
                                     var map =snapshot.value as Map<String,Any>
                                     var name =map["name"].toString()
                                     var img=map["imageUrl"].toString()
-                                    dataList.add(Board(img,"By "+name,question,content,date,uid))
-                                    rvBoard.adapter=BoardAdapter(getthis,requireContext(),dataList)
+                                    dataList.add(
+                                        Board(
+                                            img,
+                                            "By " + name,
+                                            question,
+                                            content,
+                                            date,
+                                            uid
+                                        )
+                                    )
+                                    rvBoard.adapter=
+                                        BoardAdapter(
+                                            getthis,
+                                            requireContext(),
+                                            dataList
+                                        )
                                 }
 
                             })
                     }else{
                         val imgUri="https://firebasestorage.googleapis.com/v0/b/kotilnproject-8e7fe.appspot.com/o/images%2Fvector-creator%20(1).png?alt=media&token=a4d0b071-7e00-4f87-886b-58c2232b258c"
-                        dataList.add(Board(imgUri,"By 익명",question,content,date,"private"))
-                        rvBoard.adapter=BoardAdapter(getthis ,requireContext(),dataList)
+                        dataList.add(
+                            Board(
+                                imgUri,
+                                "By 익명",
+                                question,
+                                content,
+                                date,
+                                "private"
+                            )
+                        )
+                        rvBoard.adapter=
+                            BoardAdapter(
+                                getthis,
+                                requireContext(),
+                                dataList
+                            )
                     }
 
                 }

@@ -1,4 +1,4 @@
-package with.dee2.kotilnproject
+package with.dee2.kotilnproject.Fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import with.dee2.kotilnproject.LoginActivity
+import with.dee2.kotilnproject.Model.Profiles
+import with.dee2.kotilnproject.Adapter.ProfileAdapter
+import with.dee2.kotilnproject.R
 
 class FriendListFragment:Fragment() {
     lateinit var rvprofile :RecyclerView
@@ -33,7 +37,11 @@ class FriendListFragment:Fragment() {
         rvprofile.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         //rv_profile.setHasFixedSize((true)) // 성능개선
 
-        rvprofile.adapter = ProfileAdapter(requireContext(), profileList)
+        rvprofile.adapter =
+            ProfileAdapter(
+                requireContext(),
+                profileList
+            )
 
         return view
     }
@@ -45,12 +53,12 @@ class FriendListFragment:Fragment() {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                usersnapshot=snapshot
+                usersnapshot =snapshot
                 profileList= arrayListOf<Profiles>()
-                LoginActivity.currentuseruid= FirebaseAuth.getInstance().currentUser?.uid.toString()
+                LoginActivity.currentuseruid = FirebaseAuth.getInstance().currentUser?.uid.toString()
                 var currentusermap=snapshot.child(LoginActivity.currentuseruid).value as Map<String,Any>
-                LoginActivity.currentuserimg= currentusermap["imageUrl"].toString()
-                LoginActivity.currentusername= currentusermap["name"].toString()
+                LoginActivity.currentuserimg = currentusermap["imageUrl"].toString()
+                LoginActivity.currentusername = currentusermap["name"].toString()
                 for (i in snapshot.child(LoginActivity.currentuseruid).child("chat").children){  // 현재 유저의 chat방으로 반복문
                     var map =i.value as Map<String,Any>
                     var theOtherPersonuid= map["theOtherPerson"].toString()
@@ -70,11 +78,25 @@ class FriendListFragment:Fragment() {
 
 
                     Log.d("error", "$chatroomid\n $img\n$uid $name\n$age")
-                    profileList.add(Profiles(img,name,uid,age,lastmsg,chatroomid,lasttimestamp)) // 리스트 삽입
+                    profileList.add(
+                        Profiles(
+                            img,
+                            name,
+                            uid,
+                            age,
+                            lastmsg,
+                            chatroomid,
+                            lasttimestamp
+                        )
+                    ) // 리스트 삽입
                 }
                 profileList.sortByDescending { data-> data.timestamp } // 가장 이른 시간 부터 정렬
 
-                rvprofile.adapter=ProfileAdapter(requireContext(),profileList)
+                rvprofile.adapter=
+                    ProfileAdapter(
+                        requireContext(),
+                        profileList
+                    )
 
             }
 

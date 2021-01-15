@@ -1,4 +1,4 @@
-package with.dee2.kotilnproject
+package with.dee2.kotilnproject.Adapter
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -9,6 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import with.dee2.kotilnproject.Fragment.BoardFragment
+import with.dee2.kotilnproject.Model.Board
+import with.dee2.kotilnproject.R
+import with.dee2.kotilnproject.URLtoBitmapTask
 import java.net.URL
 
 class BoardAdapter(var boardFragment: BoardFragment, var context : Context, val boardList: ArrayList<Board>) : RecyclerView.Adapter<BoardAdapter.CustomViewHolder>() {
@@ -16,21 +20,22 @@ class BoardAdapter(var boardFragment: BoardFragment, var context : Context, val 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BoardAdapter.CustomViewHolder {
+    ): CustomViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_community,parent,false)
-        return BoardAdapter.CustomViewHolder(view) // inflater -> 부착
+        return CustomViewHolder(view) // inflater -> 부착
     }
 
     override fun getItemCount(): Int {
         return boardList.size
     }
 
-    override fun onBindViewHolder(holder: BoardAdapter.CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         if (boardList.get(position).img=="null"){
             holder.img.setImageResource(R.drawable.man)
         }
         else {
-            var image_task: URLtoBitmapTask = URLtoBitmapTask()
+            var image_task: URLtoBitmapTask =
+                URLtoBitmapTask()
             image_task = URLtoBitmapTask().apply {
                 url = URL(boardList.get(position).img)
             }

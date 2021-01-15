@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_chat.*
+import with.dee2.kotilnproject.Adapter.ChatMessagesAdapter
+import with.dee2.kotilnproject.Fragment.FriendListFragment
+import with.dee2.kotilnproject.Model.ChatMessage
 import java.net.URL
 import java.util.*
 
@@ -45,7 +48,10 @@ class ChatActivity() : AppCompatActivity() {
         layoutManager.stackFromEnd=true  //역순
         rv_chat.layoutManager=layoutManager
         //rvprofile.adapter = ProfileAdapter(requireContext(), profileList)
-        rv_chat.adapter=ChatMessagesAdapter(chatcontext,chatlist)
+        rv_chat.adapter= ChatMessagesAdapter(
+            chatcontext,
+            chatlist
+        )
 
         ViewProfileOff()
 
@@ -154,11 +160,22 @@ class ChatActivity() : AppCompatActivity() {
 
 
 
-                    chatlist.add(ChatMessage(isCurrentUser,username,timestamp,msgtext))// 리스트 삽입
+                    chatlist.add(
+                        ChatMessage(
+                            isCurrentUser,
+                            username,
+                            timestamp,
+                            msgtext
+                        )
+                    )// 리스트 삽입
                 }
                 chatlist.sortByDescending{ data-> data.timestamp } // 가장 이른 시간 부터 정렬
 
-                rv_chat.adapter=ChatMessagesAdapter(chatcontext,chatlist)
+                rv_chat.adapter=
+                    ChatMessagesAdapter(
+                        chatcontext,
+                        chatlist
+                    )
                 rv_chat.scrollToPosition(0)
 
             }
