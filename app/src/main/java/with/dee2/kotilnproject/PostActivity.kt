@@ -3,11 +3,11 @@ package with.dee2.kotilnproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_post.*
+import with.dee2.kotilnproject.Model.Post
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,12 +28,22 @@ class PostActivity : AppCompatActivity() {
 
     fun saveData() {
         val time =SimpleDateFormat("yy.MM.dd").format(Date())
-        var data:Post?=null
+        var data: Post?=null
 
         if (check_private.isChecked){
-            data=Post("private",post_question.text.toString(),post_data.text.toString(),time)
+            data= Post(
+                "private",
+                post_question.text.toString(),
+                post_data.text.toString(),
+                time
+            )
         }else{
-            data=Post(FirebaseAuth.getInstance().currentUser?.uid.toString(),post_question.text.toString(),post_data.text.toString(),time)
+            data= Post(
+                FirebaseAuth.getInstance().currentUser?.uid.toString(),
+                post_question.text.toString(),
+                post_data.text.toString(),
+                time
+            )
         }
 
         database=FirebaseDatabase.getInstance().reference.child("users")

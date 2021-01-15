@@ -1,4 +1,4 @@
-package with.dee2.kotilnproject
+package with.dee2.kotilnproject.Model
 
 class ChatMessage(val isCurrentUser: Boolean, val username:String,val timestamp: String, val msgtext: String){
     companion object {

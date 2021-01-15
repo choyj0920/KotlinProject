@@ -1,4 +1,4 @@
-package with.dee2.kotilnproject
+package with.dee2.kotilnproject.Fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
+import with.dee2.kotilnproject.Adapter.QuestionAdapter
+import with.dee2.kotilnproject.Model.Question
+import with.dee2.kotilnproject.R
 
 class QuestionListFragment:Fragment() {
     var dataList=arrayListOf<Question>()
@@ -32,7 +35,10 @@ class QuestionListFragment:Fragment() {
         rvQuestion  = view.findViewById((R.id.recyclerView))as RecyclerView
         rvQuestion.layoutManager=
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
-        rvQuestion.adapter=QuestionAdapter(requireContext(),dataList)
+        rvQuestion.adapter= QuestionAdapter(
+            requireContext(),
+            dataList
+        )
 
         return view
     }
@@ -50,10 +56,20 @@ class QuestionListFragment:Fragment() {
                   var num=map["num"].toString()
                   var date=map["date"].toString()
                   var question=map["question"].toString()
-                  dataList.add(Question(num,date,question))
+                  dataList.add(
+                      Question(
+                          num,
+                          date,
+                          question
+                      )
+                  )
               }
 
-                rvQuestion.adapter=QuestionAdapter(requireContext(),dataList)
+                rvQuestion.adapter=
+                    QuestionAdapter(
+                        requireContext(),
+                        dataList
+                    )
 
             }
         })

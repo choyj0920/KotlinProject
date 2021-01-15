@@ -8,6 +8,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
+import with.dee2.kotilnproject.Fragment.BoardFragment
+import with.dee2.kotilnproject.Fragment.QuestionListFragment
+import with.dee2.kotilnproject.Fragment.FriendListFragment
 
 
 private const val NUM_PAGES = 3
@@ -65,8 +68,8 @@ class MainActivity : FragmentActivity() {
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 ->  FriendListFragment()
-                1 ->  QuestionListFragment()
+                0 -> FriendListFragment()
+                1 -> QuestionListFragment()
                 else -> BoardFragment()
             }
         }
